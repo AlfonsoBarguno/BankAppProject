@@ -39,8 +39,8 @@ public class TransactionService {
             System.out.println("Both accounts exist and are active.");
 
             if(sendingAccount.getBalance().compareTo(amount)>0){
-                sendingAccount.getBalance().subtract(amount);
-                receivingAccount.getBalance().add(amount);
+                sendingAccount.setBalance(sendingAccount.getBalance().subtract(amount));
+                receivingAccount.setBalance(receivingAccount.getBalance().add(amount));
 
                 transaction = new Transaction(sendingAccount,receivingAccount,amount);
                 sendingAccount.getSendingTransactionList().add(transaction);

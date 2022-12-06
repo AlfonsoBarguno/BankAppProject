@@ -30,7 +30,11 @@ public class TransactionController implements TransactionControllerInterface {
         Account receivingAccount = accountService.findById(receivingAccountId).
                 orElseThrow(()->new IllegalArgumentException("The receiving account does not exist."));
 
-        return transactionService.transferMoney(sendingAccount,receivingAccount,amount);
+        Transaction transaction = transactionService.transferMoney(sendingAccount,receivingAccount,amount);
+        accountService.saveAccount(sendingAccount);
+        accountService.saveAccount(receivingAccount);
+
+        return transaction;
 
 
     }

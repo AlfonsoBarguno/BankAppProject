@@ -10,4 +10,8 @@ public interface AccountServiceInterface {
     Optional<Account> findById(Long id);
 
     void changeBalance(Long id, BigDecimal amount);
+
+    void deleteAccount(Long id);
+
+    Account saveAccount(Account account);
 }

@@ -1,8 +1,10 @@
 package com.FinalProject.BankingApp.controller.accountController;
 
+import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelAccounts.CheckingAccount;
 import com.FinalProject.BankingApp.service.serviceAccount.AccountService;
 import com.FinalProject.BankingApp.service.serviceAccount.CheckingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,27 +25,23 @@ public class CheckingController implements CheckingControllerInterface {
     @Override
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public CheckingAccount createCheckingAccount(@RequestBody CheckingAccount checkingAccount) {
+    public CheckingAccount createCheckingAccount(@RequestBody @Valid CheckingAccount checkingAccount) {
          return checkingService.createCheckingAccount(checkingAccount);
     }
 
-    @Override
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCheckingAccount(@PathVariable Long id) {
 
-        checkingService.deleteCheckingAccount(id);
+        accountService.deleteAccount(id);
 
     }
-
-    @Override
     @GetMapping("/findById/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public Optional<CheckingAccount> findById(@PathVariable Long id) {
-        return checkingService.findById(id);
+    public Optional<Account> findById(@PathVariable Long id) {
+        return accountService.findById(id);
     }
 
-    @Override
     @PatchMapping("/substractBalance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void substractBalanceCheckingAccount(@PathVariable Long id, @RequestParam BigDecimal amount) {

@@ -8,9 +8,5 @@ import java.util.Optional;
 public interface CheckingControllerInterface {
 
     CheckingAccount createCheckingAccount(CheckingAccount checkingAccount);
-    void deleteCheckingAccount(Long id);
 
-    Optional<CheckingAccount> findById(Long id);
-
-    void substractBalanceCheckingAccount(Long id, BigDecimal amount);
 }

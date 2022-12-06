@@ -32,4 +32,15 @@ public class AccountService implements AccountServiceInterface {
 
         accountRepository.save(account);
     }
+
+    @Override
+    public void deleteAccount(Long id) {
+
+        accountRepository.deleteById(id);
+    }
+
+    @Override
+    public Account saveAccount(Account account) {
+        return accountRepository.save(account);
+    }
 }
