@@ -1,5 +1,6 @@
-package com.FinalProject.BankingApp.model;
+package com.FinalProject.BankingApp.model.modelAccounts;
 
+import com.FinalProject.BankingApp.model.modelActors.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.validation.constraints.NotEmpty;
@@ -15,13 +16,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @PrimaryKeyJoinColumn(name="id")
-public class StudentCheckingAccount extends Account{
+public class StudentCheckingAccount extends Account {
 
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    //@Future(message="Enter valid date.")
-    private LocalDate creationDate;
-    private Status status;
+
     @NotEmpty(message="Enter valid secret key.")
     private String secretKey;
 }

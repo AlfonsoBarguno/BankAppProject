@@ -1,6 +1,8 @@
-package com.FinalProject.BankingApp.model;
+package com.FinalProject.BankingApp.model.modelActors;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,10 @@ import lombok.NoArgsConstructor;
 public class ThirdParty {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String hashKey;
-    @NotEmpty(message="Enter a valid name.")
+
     private String name;
 }
