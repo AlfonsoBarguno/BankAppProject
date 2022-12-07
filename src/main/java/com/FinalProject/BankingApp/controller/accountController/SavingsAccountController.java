@@ -5,6 +5,7 @@ import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelAccounts.SavingsAccount;
 import com.FinalProject.BankingApp.service.serviceAccount.AccountService;
 import com.FinalProject.BankingApp.service.serviceAccount.SavingsAccountService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class SavingsAccountController implements SavingsAccountControllerInterfa
     @Override
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public SavingsAccount createSavingsAccount(@RequestBody SavingsAccount savingsAccount) {
+    public SavingsAccount createSavingsAccount(@RequestBody @Valid SavingsAccount savingsAccount) {
         return savingsAccountService.createSavingsAccount(savingsAccount);
     }
 

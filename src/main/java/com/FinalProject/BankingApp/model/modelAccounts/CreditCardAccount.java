@@ -35,10 +35,10 @@ public class CreditCardAccount extends Account {
         this.creditLimit = creditLimit;
     }
 
-    public CreditCardAccount(BigDecimal balance, Status status, LocalDate creationDate, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal interestRate, BigDecimal creditLimit) {
-        super(balance, status, creationDate, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
-        this.interestRate = interestRate;
-        this.creditLimit = creditLimit;
+    public CreditCardAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal interestRate, BigDecimal creditLimit) {
+        super(balance, status, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
+        setInterestRate(interestRate);
+        setCreditLimit(creditLimit);
     }
 
     public BigDecimal getInterestRate() {
@@ -60,6 +60,12 @@ public class CreditCardAccount extends Account {
     }
 
     public void setCreditLimit(BigDecimal creditLimit) {
+
         this.creditLimit = creditLimit;
+
+        if(creditLimit.intValue()>1000000){
+
+            this.creditLimit=BigDecimal.valueOf(1000000);
+        }
     }
 }

@@ -25,17 +25,21 @@ import java.util.List;
 public class SavingsAccount extends Account {
 
 
-
     @Min(value=100, message="The minimum balance is 100.")
     private BigDecimal minimumBalance = BigDecimal.valueOf(1000);
     //default must be 1000
 
-     //Debe ser 0.5 como máximo. No se puede hacer con anotación porque requiere integer
     private BigDecimal interestRate = BigDecimal.valueOf(0.0025);
-    //Por defecto debe ser de 0.0025
+    //Por defecto debe ser de 0.0025 y máximo de 0.5
 
 
-    private String secretKey;
+    public SavingsAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal minimumBalance, BigDecimal interestRate) {
+        super(balance, status, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
+        setMinimumBalance(minimumBalance);
+        setInterestRate(interestRate);
+    }
+
+
 
 
 
@@ -98,13 +102,6 @@ public class SavingsAccount extends Account {
 
 
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
 
 
 }

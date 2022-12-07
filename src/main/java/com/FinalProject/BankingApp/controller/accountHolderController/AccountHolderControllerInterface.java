@@ -14,4 +14,6 @@ public interface AccountHolderControllerInterface {
     List<AccountHolder> findAll();
 
     Optional<AccountHolder> findById(Long id);
+
+    String checkBalance(Long accountHolderId, Long accountId);
 }

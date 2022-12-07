@@ -25,16 +25,13 @@ public class CheckingAccount extends Account {
     private final BigDecimal monthlyMaintenanceFee = BigDecimal.valueOf(12); //12 al mes
 
 
-    private BigDecimal minimumBalance; //min=250; si se baja, balance=balance-penaltyFee
+    private BigDecimal minimumBalance = BigDecimal.valueOf(250); //min=250; si se baja, balance=balance-penaltyFee
     //final
 
-    public CheckingAccount(BigDecimal minimumBalance) {
-        this.minimumBalance = minimumBalance;
-    }
 
     public CheckingAccount(BigDecimal balance, Status status, LocalDate creationDate, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal minimumBalance) {
-        super(balance, status, creationDate, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
-        this.minimumBalance = minimumBalance;
+        super(balance, status, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
+        setMinimumBalance(minimumBalance);
     }
 
     public BigDecimal getMonthlyMaintenanceFee() {

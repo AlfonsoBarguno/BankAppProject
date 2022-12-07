@@ -26,9 +26,9 @@ public class AccountHolderController implements AccountHolderControllerInterface
     }
 
     @Override
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteAccountHolder(Long id) {
+    public void deleteAccountHolder(@PathVariable Long id) {
 
         accountHolderService.deleteAccountHolder(id);
 
@@ -42,11 +42,20 @@ public class AccountHolderController implements AccountHolderControllerInterface
     }
 
     @Override
-    @GetMapping("/findById")
+    @GetMapping("/findById/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public Optional<AccountHolder> findById(Long id) {
+    public Optional<AccountHolder> findById(@PathVariable Long id) {
         return accountHolderService.findById(id);
     }
+
+    @Override
+    @GetMapping("/checkBalance/{accountHolderId}/{accountId}")
+    @ResponseStatus(HttpStatus.OK)
+    public String checkBalance(@PathVariable Long accountHolderId, @PathVariable Long accountId) {
+        return accountHolderService.checkAccountBalance(accountHolderId,accountId);
+    }
+
+    //da como resultado null; posible problema en la búsqueda del accountList
 
 
 }

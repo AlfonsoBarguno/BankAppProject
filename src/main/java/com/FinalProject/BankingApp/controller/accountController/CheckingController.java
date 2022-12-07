@@ -42,12 +42,5 @@ public class CheckingController implements CheckingControllerInterface {
         return accountService.findById(id);
     }
 
-    @PatchMapping("/substractBalance/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void substractBalanceCheckingAccount(@PathVariable Long id, @RequestParam BigDecimal amount) {
 
-        accountService.changeBalance(id,amount);
-
-
-    }
 }

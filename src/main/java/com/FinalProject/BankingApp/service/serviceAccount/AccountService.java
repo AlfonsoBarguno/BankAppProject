@@ -24,13 +24,23 @@ public class AccountService implements AccountServiceInterface {
     }
 
     @Override
-    public void changeBalance(Long id, BigDecimal amount) {
+    public Account substractBalance(Long id, BigDecimal amount) {
 
         Account account = accountRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No account found."));
 
         account.setBalance(account.getBalance().subtract(amount));
 
-        accountRepository.save(account);
+        return accountRepository.save(account);
+    }
+
+    @Override
+    public Account addBalance(Long id, BigDecimal amount) {
+
+        Account account = accountRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No account found."));
+
+        account.setBalance(account.getBalance().add(amount));
+
+       return accountRepository.save(account);
     }
 
     @Override

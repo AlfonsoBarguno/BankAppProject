@@ -6,6 +6,8 @@ import com.FinalProject.BankingApp.model.modelActors.Status;
 import com.FinalProject.BankingApp.model.modelTransaction.Transaction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,14 +29,17 @@ public abstract class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotNull(message="There must be at least some balance.")
     private BigDecimal balance;
 
+    @NotNull(message="Status is mandatory.")
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate creationDate;
 
+    @NotBlank(message="You need a valid secret key.")
     private String secretKey;
 
     @ManyToOne
@@ -56,12 +61,12 @@ public abstract class Account {
     private List<Transaction> receivingTransactionList = new ArrayList<>();
 
 
-    public Account(BigDecimal balance, Status status, LocalDate creationDate, String secretKey,
+    public Account(BigDecimal balance, Status status, String secretKey,
                    AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList,
                    List<Transaction> receivingTransactionList) {
         this.balance = balance;
         this.status = status;
-        this.creationDate = creationDate;
+        setCreationDate(LocalDate.now());
         this.secretKey = secretKey;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
@@ -135,6 +140,7 @@ public abstract class Account {
     }
 
     public void setCreationDate(LocalDate creationDate) {
+
         this.creationDate = creationDate;
     }
 

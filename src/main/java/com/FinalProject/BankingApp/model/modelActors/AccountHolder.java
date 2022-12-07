@@ -2,11 +2,14 @@ package com.FinalProject.BankingApp.model.modelActors;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,10 +20,13 @@ import java.util.List;
 public class AccountHolder extends BankUser {
 
 
+    //@NotBlank(message="Enter valid date of birth.")
     private LocalDate dateOfBirth;
 
+    @NotNull(message="Enter valid address.")
     @Embedded
     private Address address;
+
 
     @AttributeOverrides({
             @AttributeOverride(name="streetAddress",column=@Column(name="mailing_street")),
@@ -31,9 +37,11 @@ public class AccountHolder extends BankUser {
     private Address mailingAddress;
 
     @OneToMany(mappedBy = "primaryOwner")
-    private List<Account> accountList;
+    private List<Account> accountList = new ArrayList<>();
 
-    //Lista de secondary owner
+    @OneToMany(mappedBy = "secondaryOwner")
+    private List<Account> secondaryOwnerAccountList = new ArrayList<>();
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }

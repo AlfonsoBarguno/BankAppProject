@@ -9,7 +9,9 @@ public interface AccountServiceInterface {
 
     Optional<Account> findById(Long id);
 
-    void changeBalance(Long id, BigDecimal amount);
+    Account substractBalance(Long id, BigDecimal amount);
+
+    Account addBalance(Long id, BigDecimal amount);
 
     void deleteAccount(Long id);
 

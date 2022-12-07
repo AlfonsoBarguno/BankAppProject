@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -43,8 +44,13 @@ public class TransactionService {
                 receivingAccount.setBalance(receivingAccount.getBalance().add(amount));
 
                 transaction = new Transaction(sendingAccount,receivingAccount,amount);
-                sendingAccount.getSendingTransactionList().add(transaction);
-                receivingAccount.getReceivingTransactionList().add(transaction);
+
+                List<Transaction> sendingTransaction= sendingAccount.getSendingTransactionList();
+                sendingTransaction.add(transaction);
+
+                List<Transaction> receivingTransaction= receivingAccount.getSendingTransactionList();
+                receivingTransaction.add(transaction);
+
 
                 accountRepository.save(sendingAccount);
                 accountRepository.save(receivingAccount);

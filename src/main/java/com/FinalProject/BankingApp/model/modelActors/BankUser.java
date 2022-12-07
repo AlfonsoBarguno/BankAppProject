@@ -1,6 +1,7 @@
 package com.FinalProject.BankingApp.model.modelActors;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,7 @@ public abstract class BankUser {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    //@NotEmpty(message="Enter valid name.")
+    @NotBlank(message="Enter valid name.")
     private String name;
 
     public BankUser(String name) {
