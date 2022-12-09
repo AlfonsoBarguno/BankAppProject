@@ -21,9 +21,10 @@ public class CreditCardController implements CreditCardControllerInterface{
     CreditCardAccountService creditCardAccountService;
 
     @Override
-    @PostMapping("/create")
+    @PostMapping("/create/{accountHolderId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account createCreditCardAccount(@RequestBody @Valid CreditCardAccount creditCardAccount) {
-        return creditCardAccountService.createCreditCardAccount(creditCardAccount);
+    public Account createCreditCardAccount(@RequestBody @Valid CreditCardAccount creditCardAccount,
+                                           @PathVariable Long accountHolderId) {
+        return creditCardAccountService.createCreditCardAccount(creditCardAccount, accountHolderId);
     }
 }

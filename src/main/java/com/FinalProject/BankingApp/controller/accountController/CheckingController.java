@@ -23,16 +23,16 @@ public class CheckingController implements CheckingControllerInterface {
     AccountService accountService;
 
     @Override
-    @PostMapping("/create")
+    @PostMapping("/create/{accountHolderId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public CheckingAccount createCheckingAccount(@RequestBody @Valid CheckingAccount checkingAccount) {
-         return checkingService.createCheckingAccount(checkingAccount);
+    public CheckingAccount createCheckingAccount(@RequestBody @Valid CheckingAccount checkingAccount,
+                                                 @PathVariable Long accountHolderId) {
+         return checkingService.createCheckingAccount(checkingAccount, accountHolderId);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCheckingAccount(@PathVariable Long id) {
-
         accountService.deleteAccount(id);
 
     }

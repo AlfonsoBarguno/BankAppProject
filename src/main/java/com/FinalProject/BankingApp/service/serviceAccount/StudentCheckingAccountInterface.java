@@ -5,6 +5,6 @@ import com.FinalProject.BankingApp.model.modelAccounts.StudentCheckingAccount;
 
 public interface StudentCheckingAccountInterface {
 
-    StudentCheckingAccount createStudentCheckingAccount (StudentCheckingAccount StudentCheckingAccount);
+    StudentCheckingAccount createStudentCheckingAccount (StudentCheckingAccount StudentCheckingAccount, Long accountHolderId);
 
 }

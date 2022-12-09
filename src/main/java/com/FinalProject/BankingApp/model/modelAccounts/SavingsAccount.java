@@ -34,7 +34,7 @@ public class SavingsAccount extends Account {
 
 
     public SavingsAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal minimumBalance, BigDecimal interestRate) {
-        super(balance, status, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
+        super(balance, status, secretKey, primaryOwner,secondaryOwner, sendingTransactionList, receivingTransactionList);
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
     }

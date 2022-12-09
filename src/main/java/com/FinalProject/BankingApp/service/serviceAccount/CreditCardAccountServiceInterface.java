@@ -5,5 +5,5 @@ import com.FinalProject.BankingApp.model.modelAccounts.CreditCardAccount;
 
 public interface CreditCardAccountServiceInterface {
 
-    Account createCreditCardAccount (CreditCardAccount creditCardAccount);
+    Account createCreditCardAccount (CreditCardAccount creditCardAccount, Long accountHolderId);
 }

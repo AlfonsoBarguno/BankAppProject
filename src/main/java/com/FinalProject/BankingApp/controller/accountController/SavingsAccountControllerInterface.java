@@ -4,5 +4,5 @@ import com.FinalProject.BankingApp.model.modelAccounts.SavingsAccount;
 
 public interface  SavingsAccountControllerInterface {
 
-    SavingsAccount createSavingsAccount(SavingsAccount savingsAccount);
+    SavingsAccount createSavingsAccount(SavingsAccount savingsAccount, Long accountHolderId);
 }

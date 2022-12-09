@@ -1,5 +1,6 @@
 package com.FinalProject.BankingApp.service.serviceActors;
 
+import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface AccountHolderServiceInterface {
     List<AccountHolder> findAll();
 
     String checkAccountBalance (Long AccountHolderId, Long accountId);
+
+    List<Account> findAccountList(Long accountHolderId);
 }

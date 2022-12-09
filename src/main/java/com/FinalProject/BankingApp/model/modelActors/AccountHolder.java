@@ -42,6 +42,20 @@ public class AccountHolder extends BankUser {
     @OneToMany(mappedBy = "secondaryOwner")
     private List<Account> secondaryOwnerAccountList = new ArrayList<>();
 
+
+    public AccountHolder(String name, LocalDate dateOfBirth, Address address,
+                         Address mailingAddress, List<Account> accountList, List<Account> secondaryOwnerAccountList) {
+        super(name);
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.mailingAddress = mailingAddress;
+        this.accountList = accountList;
+        this.secondaryOwnerAccountList = secondaryOwnerAccountList;
+    }
+
+    public AccountHolder(Address address) {
+    }
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }

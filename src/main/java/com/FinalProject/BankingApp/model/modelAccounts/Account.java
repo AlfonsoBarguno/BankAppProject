@@ -62,7 +62,7 @@ public abstract class Account {
 
 
     public Account(BigDecimal balance, Status status, String secretKey,
-                   AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList,
+                    AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList,
                    List<Transaction> receivingTransactionList) {
         this.balance = balance;
         this.status = status;
@@ -124,6 +124,7 @@ public abstract class Account {
     }
 
     public void setBalance(BigDecimal balance) {
+
         this.balance = balance;
     }
 

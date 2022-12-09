@@ -1,5 +1,8 @@
 package com.FinalProject.BankingApp.model.modelActors;
 
+import com.FinalProject.BankingApp.model.modelSecurity.Role;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,23 +10,45 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 public abstract class BankUser {
+
+    //extender funcionalidades User
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @NotBlank(message="Enter valid name.")
-    private String name;
+    private String username;
 
+    private String password;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Role> roles = new HashSet<>();
+
+    @JsonCreator
     public BankUser(String name) {
-        this.name = name;
+        this.username = name;
     }
+
+    public BankUser() {
+    }
+
+    @JsonCreator
+    public BankUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -34,10 +59,10 @@ public abstract class BankUser {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 }

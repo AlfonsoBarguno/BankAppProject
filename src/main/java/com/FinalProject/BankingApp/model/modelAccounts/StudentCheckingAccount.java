@@ -1,6 +1,8 @@
 package com.FinalProject.BankingApp.model.modelAccounts;
 
+import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 import com.FinalProject.BankingApp.model.modelActors.Status;
+import com.FinalProject.BankingApp.model.modelTransaction.Transaction;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,7 +11,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,8 +23,11 @@ import java.time.LocalDate;
 @PrimaryKeyJoinColumn(name="id")
 public class StudentCheckingAccount extends Account {
 
-
-
-    @NotEmpty(message="Enter valid secret key.")
     private String secretKey;
+
+
+
+//es igual que Account
+
+
 }

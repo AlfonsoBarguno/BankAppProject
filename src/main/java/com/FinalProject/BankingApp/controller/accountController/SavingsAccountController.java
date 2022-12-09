@@ -26,10 +26,11 @@ public class SavingsAccountController implements SavingsAccountControllerInterfa
 
 
     @Override
-    @PostMapping("/create")
+    @PostMapping("/create/{accountHolderId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public SavingsAccount createSavingsAccount(@RequestBody @Valid SavingsAccount savingsAccount) {
-        return savingsAccountService.createSavingsAccount(savingsAccount);
+    public SavingsAccount createSavingsAccount(@RequestBody @Valid SavingsAccount savingsAccount,
+                                               @PathVariable Long accountHolderId ) {
+        return savingsAccountService.createSavingsAccount(savingsAccount, accountHolderId);
     }
 
     @GetMapping("/findById/{id}")

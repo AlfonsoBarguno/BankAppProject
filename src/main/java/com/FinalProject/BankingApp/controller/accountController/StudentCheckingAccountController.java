@@ -6,9 +6,8 @@ import com.FinalProject.BankingApp.service.serviceAccount.AccountService;
 import com.FinalProject.BankingApp.service.serviceAccount.StudentCheckingAccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/studentCheckingAccount")
@@ -22,7 +21,10 @@ public class StudentCheckingAccountController implements StudentCheckingAccountC
 
 
     @Override
-    public StudentCheckingAccount createStudentCheckingAccount(@RequestBody @Valid StudentCheckingAccount studentCheckingAccount) {
-        return studentCheckingAccountService.createStudentCheckingAccount(studentCheckingAccount);
+    @PostMapping("/create/{accountHolderId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public StudentCheckingAccount createStudentCheckingAccount
+            (@RequestBody @Valid StudentCheckingAccount studentCheckingAccount, @PathVariable Long accountHolderId) {
+        return studentCheckingAccountService.createStudentCheckingAccount(studentCheckingAccount, accountHolderId);
     }
 }

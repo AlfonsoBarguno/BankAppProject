@@ -58,6 +58,16 @@ public class CheckingAccount extends Account {
         }
     }
 
+    //método para aplicar la penaltyFee.
+    // Este método debe estar presente en substract y en transaction
+    public void applyPenaltyFee(){
+
+        if(getBalance().intValue()<minimumBalance.intValue()){
+
+            setBalance(getBalance().subtract(getPenaltyFee()));
+        }
+    }
+
 
 
 

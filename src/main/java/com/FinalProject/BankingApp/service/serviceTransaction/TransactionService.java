@@ -23,7 +23,7 @@ public class TransactionService {
     AccountRepository accountRepository;
 
 
-    public Transaction transferMoney(Account sendingAccount, Account receivingAccount, BigDecimal amount){
+    public Transaction transferMoney(Account sendingAccount, Account receivingAccount, BigDecimal amount) {
 
         //1. Ver si existen las cuentas
         //2. Ver si tienen fondos
@@ -32,23 +32,23 @@ public class TransactionService {
 
         Transaction transaction;
 
-        if(accountRepository.existsById(sendingAccount.getId())
+        if (accountRepository.existsById(sendingAccount.getId())
                 || accountRepository.existsById(receivingAccount.getId())
-                || sendingAccount.getStatus()== Status.ACTIVE
-                || receivingAccount.getStatus()==Status.ACTIVE){
+                || sendingAccount.getStatus() == Status.ACTIVE
+                || receivingAccount.getStatus() == Status.ACTIVE) {
 
             System.out.println("Both accounts exist and are active.");
 
-            if(sendingAccount.getBalance().compareTo(amount)>0){
+            if (sendingAccount.getBalance().compareTo(amount) > 0) {
                 sendingAccount.setBalance(sendingAccount.getBalance().subtract(amount));
                 receivingAccount.setBalance(receivingAccount.getBalance().add(amount));
 
-                transaction = new Transaction(sendingAccount,receivingAccount,amount);
+                transaction = new Transaction(sendingAccount, receivingAccount, amount);
 
-                List<Transaction> sendingTransaction= sendingAccount.getSendingTransactionList();
+                List<Transaction> sendingTransaction = sendingAccount.getSendingTransactionList();
                 sendingTransaction.add(transaction);
 
-                List<Transaction> receivingTransaction= receivingAccount.getSendingTransactionList();
+                List<Transaction> receivingTransaction = receivingAccount.getReceivingTransactionList();
                 receivingTransaction.add(transaction);
 
 
@@ -66,69 +66,18 @@ public class TransactionService {
     }
 
 
-
-    public Transaction saveTransaction(Transaction transaction){
+    public Transaction saveTransaction(Transaction transaction) {
 
         return transactionRepository.save(transaction);
     }
 
 
-
-
-    public Optional<Transaction> getById(Long id){
+    public Optional<Transaction> getById(Long id) {
 
         Optional<Transaction> opTrans = Optional.ofNullable(transactionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Insert valid id.")));
 
         return opTrans;
     }
-
-
-
-
-
-
- /*
-    public Transaction transferMoney(CheckingAccount sendingAccount, CheckingAccount receivingAccount, BigDecimal amount){
-
-        //1. Ver si existen las cuentas
-        //2. Ver si tienen fondos
-        //3.Realizar transacción
-        //4.Actualizar datos
-
-        Transaction transaction;
-
-        if(checkingAccountRepository.existsById(sendingAccount.getId())
-                || checkingAccountRepository.existsById(receivingAccount.getId())
-                 || sendingAccount.getStatus()== Status.ACTIVE
-                  || receivingAccount.getStatus()==Status.ACTIVE){
-
-            System.out.println("Both accounts exist and are active.");
-
-            if(sendingAccount.getBalance().compareTo(amount)>0){
-                sendingAccount.getBalance().subtract(amount);
-                receivingAccount.getBalance().add(amount);
-
-                transaction = new Transaction(sendingAccount,receivingAccount,amount);
-                sendingAccount.getSendingTransactionList().add(transaction);
-                receivingAccount.getReceivingTransactionList().add(transaction);
-
-                checkingAccountRepository.save(sendingAccount);
-                checkingAccountRepository.save(receivingAccount);
-
-            } else throw new IllegalArgumentException("Not enough funds in sending account");
-
-
-        } else throw new NoSuchElementException("One of the accounts does not exists.");
-
-
-        return transaction;
-    }*/
-
-
-
-
-
-
 
 
 }
