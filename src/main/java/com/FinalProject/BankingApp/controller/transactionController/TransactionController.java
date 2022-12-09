@@ -39,5 +39,25 @@ public class TransactionController implements TransactionControllerInterface {
 
     }
 
+    @PostMapping("thirdParty/{sendingAccountId}/{secretKeySendingAccount}/{receivingAccountId}/{amount}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Transaction makeTransferThirdParty(@PathVariable Long sendingAccountId, @PathVariable String secretKeySendingAccount,
+                                              @PathVariable Long receivingAccountId, @PathVariable BigDecimal amount,
+                                              @RequestHeader("hashKey") String hashKey) {
+
+        Account sendingAccount = accountService.findById(sendingAccountId).
+                orElseThrow(()->new IllegalArgumentException("The sending account does not exist."));
+        Account receivingAccount = accountService.findById(receivingAccountId).
+                orElseThrow(()->new IllegalArgumentException("The receiving account does not exist."));
+
+        Transaction transaction = transactionService.transferMoney(sendingAccount,receivingAccount,amount);
+        accountService.saveAccount(sendingAccount);
+        accountService.saveAccount(receivingAccount);
+
+        return transaction;
+
+
+    }
+
 
 }

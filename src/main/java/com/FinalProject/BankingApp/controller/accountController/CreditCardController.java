@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/creditCard")
 public class CreditCardController implements CreditCardControllerInterface{
@@ -26,5 +28,14 @@ public class CreditCardController implements CreditCardControllerInterface{
     public Account createCreditCardAccount(@RequestBody @Valid CreditCardAccount creditCardAccount,
                                            @PathVariable Long accountHolderId) {
         return creditCardAccountService.createCreditCardAccount(creditCardAccount, accountHolderId);
+    }
+
+    @GetMapping("/findById/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Optional<Account> findById(@PathVariable Long id){
+
+        creditCardAccountService.applyInterestRate(id);
+
+        return accountService.findById(id);
     }
 }

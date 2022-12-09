@@ -35,6 +35,8 @@ public class SecurityConfiguration {
                .requestMatchers(HttpMethod.PATCH,"/substract/{accountId}").hasRole("ADMIN")
                .requestMatchers(HttpMethod.PATCH,"/add/{accountId}").hasRole("ADMIN")
                .requestMatchers(HttpMethod.POST,"/createThirdParty").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.GET,"/checkBalance/{accountHolderId}/{accountId}").hasRole("USER")
+
 
 
                .anyRequest().permitAll();

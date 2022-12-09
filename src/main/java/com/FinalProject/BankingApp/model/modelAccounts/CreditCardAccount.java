@@ -13,20 +13,21 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name="id")
+@PrimaryKeyJoinColumn(name = "id")
 public class CreditCardAccount extends Account {
 
 
     private BigDecimal interestRate = BigDecimal.valueOf((long) 0.2);
     //por defecto, 0.2; puede ser menor que 0.2 pero no menor que 0.1;
     // se carga al balance cada mes.
-    @Max(value=1000000)
-    private BigDecimal creditLimit= BigDecimal.valueOf(100);
+    @Max(value = 1000000)
+    private BigDecimal creditLimit = BigDecimal.valueOf(100);
     //por defecto, 100. Puede ser mayor que 100 pero menor que 1000000
 
 
@@ -41,6 +42,7 @@ public class CreditCardAccount extends Account {
         setCreditLimit(creditLimit);
     }
 
+
     public BigDecimal getInterestRate() {
         return interestRate;
     }
@@ -49,11 +51,26 @@ public class CreditCardAccount extends Account {
 
         this.interestRate = interestRate;
 
-        if(interestRate.doubleValue()<0.1){
+        if (interestRate.doubleValue() < 0.1) {
 
-            this.interestRate = BigDecimal.valueOf((long)0.1);
+            this.interestRate = BigDecimal.valueOf((long) 0.1);
         }
     }
+
+    public void applyInterestRate() {
+
+        Period oneMonth = Period.ofMonths(1);
+
+        if (oneMonth.equals(getCreationDate().compareTo(LocalDate.now()))) {
+
+            setBalance((BigDecimal.valueOf(getBalance().doubleValue()
+                    * interestRate.doubleValue())).add(BigDecimal.valueOf(getBalance().doubleValue())));
+
+        }
+
+
+    }
+
 
     public BigDecimal getCreditLimit() {
         return creditLimit;
@@ -63,9 +80,9 @@ public class CreditCardAccount extends Account {
 
         this.creditLimit = creditLimit;
 
-        if(creditLimit.intValue()>1000000){
+        if (creditLimit.intValue() > 1000000) {
 
-            this.creditLimit=BigDecimal.valueOf(1000000);
+            this.creditLimit = BigDecimal.valueOf(1000000);
         }
     }
 }

@@ -37,6 +37,9 @@ public class SavingsAccountController implements SavingsAccountControllerInterfa
     @ResponseStatus(HttpStatus.FOUND)
     public Optional<Account> findById(@PathVariable Long id){
 
+        savingsAccountService.applyPenaltyFee(id);
+        savingsAccountService.applyInterestRate(id);
+
         return accountService.findById(id);
     }
 

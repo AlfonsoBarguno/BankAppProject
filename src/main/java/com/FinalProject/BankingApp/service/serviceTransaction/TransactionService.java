@@ -1,9 +1,11 @@
 package com.FinalProject.BankingApp.service.serviceTransaction;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
+import com.FinalProject.BankingApp.model.modelAccounts.CheckingAccount;
 import com.FinalProject.BankingApp.model.modelTransaction.Transaction;
 import com.FinalProject.BankingApp.model.modelActors.Status;
 import com.FinalProject.BankingApp.repository.AccountRepository;
+import com.FinalProject.BankingApp.repository.CheckingAccountRepository;
 import com.FinalProject.BankingApp.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class TransactionService {
 
     @Autowired
     TransactionRepository transactionRepository;
+
+    @Autowired
+    CheckingAccountRepository checkingAccountRepository;
 
     @Autowired
     AccountRepository accountRepository;
@@ -39,11 +44,14 @@ public class TransactionService {
 
             System.out.println("Both accounts exist and are active.");
 
+
             if (sendingAccount.getBalance().compareTo(amount) > 0) {
                 sendingAccount.setBalance(sendingAccount.getBalance().subtract(amount));
                 receivingAccount.setBalance(receivingAccount.getBalance().add(amount));
 
                 transaction = new Transaction(sendingAccount, receivingAccount, amount);
+
+                transactionRepository.save(transaction);
 
                 List<Transaction> sendingTransaction = sendingAccount.getSendingTransactionList();
                 sendingTransaction.add(transaction);
@@ -60,6 +68,8 @@ public class TransactionService {
 
         } else throw new NoSuchElementException("One of the accounts does not exists.");
         //lanzar ReponseStatusException
+
+
 
         System.out.println("Transaction done");
         return transaction;

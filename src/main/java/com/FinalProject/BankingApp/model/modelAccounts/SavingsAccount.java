@@ -15,17 +15,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@PrimaryKeyJoinColumn(name="id")
+@PrimaryKeyJoinColumn(name = "id")
 public class SavingsAccount extends Account {
 
 
-    @Min(value=100, message="The minimum balance is 100.")
+    @Min(value = 100, message = "The minimum balance is 100.")
     private BigDecimal minimumBalance = BigDecimal.valueOf(1000);
     //default must be 1000
 
@@ -34,10 +35,35 @@ public class SavingsAccount extends Account {
 
 
     public SavingsAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal minimumBalance, BigDecimal interestRate) {
-        super(balance, status, secretKey, primaryOwner,secondaryOwner, sendingTransactionList, receivingTransactionList);
+        super(balance, status, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
         setMinimumBalance(minimumBalance);
         setInterestRate(interestRate);
     }
+
+    public void applyPenaltyFee() {
+
+        if (getBalance().intValue() < minimumBalance.intValue()) {
+
+            setBalance(getBalance().subtract(getPenaltyFee()));
+        }
+    }
+
+    public void applyInterestRate() {
+
+        Period oneYear = Period.ofYears(1);
+
+        if (oneYear.equals(getCreationDate().compareTo(LocalDate.now()))) {
+
+            setBalance(BigDecimal.valueOf(getBalance().doubleValue()
+                    * interestRate.doubleValue()).add(BigDecimal.valueOf(getBalance().doubleValue())));
+
+        }
+
+
+    }
+
+
+
 
 
 
@@ -67,7 +93,6 @@ public class SavingsAccount extends Account {
     }*/
 
 
-
     public BigDecimal getMinimumBalance() {
         return minimumBalance;
     }
@@ -76,9 +101,9 @@ public class SavingsAccount extends Account {
 
         this.minimumBalance = minimumBalance;
 
-        if(minimumBalance.intValue()<100){
+        if (minimumBalance.intValue() < 100) {
 
-            this.minimumBalance= BigDecimal.valueOf(100);
+            this.minimumBalance = BigDecimal.valueOf(100);
 
             System.out.println("The minimum balance is 100.");
 
@@ -93,15 +118,12 @@ public class SavingsAccount extends Account {
 
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
-        if(interestRate.doubleValue() > 0.5){
-            this.interestRate= BigDecimal.valueOf(0.5);
+        if (interestRate.doubleValue() > 0.5) {
+            this.interestRate = BigDecimal.valueOf(0.5);
             System.out.println("The maxium interest rate is 0.5%.");
         }
 
     }
-
-
-
 
 
 }

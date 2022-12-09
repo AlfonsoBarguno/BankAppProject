@@ -37,7 +37,7 @@ public abstract class Account {
     private Status status;
 
     //@DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate creationDate;
+    private LocalDate creationDate = LocalDate.now();
 
     @NotBlank(message="You need a valid secret key.")
     private String secretKey;

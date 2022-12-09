@@ -60,4 +60,11 @@ public class CheckingService implements CheckingServiceInterface {
 
         return checkingAccountRepository.save(account);
     }
+
+    public void applyPenaltyFee(Long accountId){
+
+        CheckingAccount checkingAccount= checkingAccountRepository.findById(accountId).get();
+
+        checkingAccount.applyPenaltyFee();
+    }
 }

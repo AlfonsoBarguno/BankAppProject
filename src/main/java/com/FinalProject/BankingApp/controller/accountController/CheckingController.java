@@ -39,6 +39,9 @@ public class CheckingController implements CheckingControllerInterface {
     @GetMapping("/findById/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public Optional<Account> findById(@PathVariable Long id) {
+
+        checkingService.applyPenaltyFee(id);
+
         return accountService.findById(id);
     }
 

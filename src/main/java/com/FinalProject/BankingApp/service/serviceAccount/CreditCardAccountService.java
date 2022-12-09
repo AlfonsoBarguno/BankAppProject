@@ -2,6 +2,7 @@ package com.FinalProject.BankingApp.service.serviceAccount;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelAccounts.CreditCardAccount;
+import com.FinalProject.BankingApp.model.modelAccounts.SavingsAccount;
 import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 import com.FinalProject.BankingApp.repository.AccountHolderRepository;
 import com.FinalProject.BankingApp.repository.CreditCardRepository;
@@ -33,4 +34,13 @@ public class CreditCardAccountService implements CreditCardAccountServiceInterfa
 
         return creditCardRepository.save(creditCardAccount);
     }
+
+    public void applyInterestRate(Long id){
+
+        CreditCardAccount creditCardAccount = creditCardRepository.findById(id).get();
+
+        creditCardAccount.applyInterestRate();
+    }
+
+
 }

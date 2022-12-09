@@ -76,7 +76,7 @@ public class AdminController implements AdminControllerInterface{
     @Override
     @PostMapping("/createThirdParty")
     @ResponseStatus(HttpStatus.CREATED)
-    public ThirdParty createThirdParty(ThirdParty thirdParty) {
+    public ThirdParty createThirdParty(@RequestBody ThirdParty thirdParty) {
         return thirdPartyService.createThirdParty(thirdParty);
     }
 }

@@ -1,6 +1,7 @@
 package com.FinalProject.BankingApp.service.serviceAccount;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
+import com.FinalProject.BankingApp.model.modelAccounts.CheckingAccount;
 import com.FinalProject.BankingApp.model.modelAccounts.SavingsAccount;
 import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 import com.FinalProject.BankingApp.repository.AccountHolderRepository;
@@ -31,5 +32,19 @@ public class SavingsAccountService implements SavingsAccountServiceInterface {
         accountHolderRepository.save(accountHolder);
 
         return savingsRepository.save(savingsAccount);
+    }
+
+    public void applyPenaltyFee(Long accountId){
+
+        SavingsAccount savingsAccount= savingsRepository.findById(accountId).get();
+
+        savingsAccount.applyPenaltyFee();
+    }
+
+    public void applyInterestRate(Long accountId){
+
+        SavingsAccount savingsAccount= savingsRepository.findById(accountId).get();
+
+        savingsAccount.applyInterestRate();
     }
 }
