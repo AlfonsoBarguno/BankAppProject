@@ -2,13 +2,17 @@ package com.FinalProject.BankingApp.service.serviceAccount;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelAccounts.CheckingAccount;
+import com.FinalProject.BankingApp.model.modelAccounts.StudentCheckingAccount;
 import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 import com.FinalProject.BankingApp.repository.AccountHolderRepository;
 import com.FinalProject.BankingApp.repository.CheckingAccountRepository;
+import com.FinalProject.BankingApp.repository.StudentCheckingAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +25,36 @@ public class CheckingService implements CheckingServiceInterface {
     @Autowired
     AccountHolderRepository accountHolderRepository;
 
+    @Autowired
+    StudentCheckingAccountService studentCheckingAccountService;
+
     @Override
     public CheckingAccount createCheckingAccount(CheckingAccount checkingAccount, Long accountHolderId) {
 
         AccountHolder accountHolder = accountHolderRepository
                 .findById(accountHolderId).orElseThrow(()->new IllegalArgumentException("This accountHolder does not exist."));
+
+
+        //Por alguna razón, no reconoce la dateOfBirth y, por lo tanto,
+        //no asigna la studentAccount a los menores de 24, pero creo que
+        //esta sería la lógica
+
+        /*
+        Period accountHolderAge = Period.between(accountHolder.getDateOfBirth(), LocalDate.now());
+
+        if(accountHolderAge.getYears()<24){
+
+            StudentCheckingAccount studentCheckingAccount =
+                    new StudentCheckingAccount(checkingAccount.getBalance(),checkingAccount.getStatus(),
+                            checkingAccount.getSecretKey(),checkingAccount.getPrimaryOwner(),checkingAccount.getSecondaryOwner(),
+                            checkingAccount.getSendingTransactionList(),checkingAccount.getReceivingTransactionList(),
+                            checkingAccount.getMinimumBalance(),BigDecimal.valueOf(0.0025));
+
+        studentCheckingAccountService.createStudentCheckingAccount(studentCheckingAccount,accountHolderId);
+
+
+        } else {*/
+
 
         checkingAccount.setPrimaryOwner(accountHolder);
         List<Account> accountList = accountHolder.getAccountList();

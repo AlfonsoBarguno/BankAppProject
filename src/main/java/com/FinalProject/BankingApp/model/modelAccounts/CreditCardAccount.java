@@ -60,12 +60,12 @@ public class CreditCardAccount extends Account {
 
     public void applyInterestRate() {
 
-        Period oneMonth = Period.ofMonths(1);
+        Period oneMonth = Period.between(getCreationDate(), LocalDate.now());
 
-        if (oneMonth.equals(getCreationDate().compareTo(LocalDate.now()))) {
 
-            setBalance((BigDecimal.valueOf(getBalance().doubleValue()
-                    * interestRate.doubleValue())).add(BigDecimal.valueOf(getBalance().doubleValue())));
+        if (oneMonth.getMonths() > 1) {
+            setBalance(BigDecimal.valueOf(getBalance().doubleValue()
+                    * interestRate.doubleValue()).add(BigDecimal.valueOf(getBalance().doubleValue())));
 
         }
 

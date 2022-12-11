@@ -1,6 +1,11 @@
 package com.FinalProject.BankingApp.model.modelActors;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,8 +24,8 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name="id")
 public class AccountHolder extends BankUser {
 
-
-    //@NotBlank(message="Enter valid date of birth.")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateOfBirth;
 
     @NotNull(message="Enter valid address.")

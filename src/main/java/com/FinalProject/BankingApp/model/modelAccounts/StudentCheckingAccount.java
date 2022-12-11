@@ -25,6 +25,8 @@ public class StudentCheckingAccount extends Account {
 
     private String secretKey;
 
+    public StudentCheckingAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal minimumBalance, BigDecimal interestRate) {
+    }
 
 
 //es igual que Account

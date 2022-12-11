@@ -50,47 +50,15 @@ public class SavingsAccount extends Account {
 
     public void applyInterestRate() {
 
-        Period oneYear = Period.ofYears(1);
+        Period oneYear1 = Period.between(getCreationDate(), LocalDate.now());
 
-        if (oneYear.equals(getCreationDate().compareTo(LocalDate.now()))) {
-
+        if (oneYear1.getYears() > 1) {
             setBalance(BigDecimal.valueOf(getBalance().doubleValue()
                     * interestRate.doubleValue()).add(BigDecimal.valueOf(getBalance().doubleValue())));
 
         }
 
-
     }
-
-
-
-
-
-
-
-
-
-   /* public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setSavingsAccountBalance(BigDecimal balance) {
-
-        this.balance = balance;
-        //si el balance es menor que el minimum, se resta la penaltyFee
-        if(balance.intValue()< minimumBalance.intValue()){
-
-            this.balance = (balance.subtract(getPenaltyFee()));
-
-            //con BigDecimal (substract)
-        }
-
-        //cada año se le aplica la tasa de interés
-        LocalDate oneYear = LocalDate.ofEpochDay(creationDate.getYear()+1);
-        if(oneYear.isAfter(creationDate)){
-
-        } //método que comprueba fecha, aplicar interestRate
-    }*/
 
 
     public BigDecimal getMinimumBalance() {
