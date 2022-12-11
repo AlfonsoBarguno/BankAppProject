@@ -36,7 +36,8 @@ public class CreditCardAccount extends Account {
         this.creditLimit = creditLimit;
     }
 
-    public CreditCardAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal interestRate, BigDecimal creditLimit) {
+    public CreditCardAccount(BigDecimal balance, Status status, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+                             List<Transaction> sendingTransactionList, List<Transaction> receivingTransactionList, BigDecimal interestRate, BigDecimal creditLimit) {
         super(balance, status, secretKey, primaryOwner, secondaryOwner, sendingTransactionList, receivingTransactionList);
         setInterestRate(interestRate);
         setCreditLimit(creditLimit);

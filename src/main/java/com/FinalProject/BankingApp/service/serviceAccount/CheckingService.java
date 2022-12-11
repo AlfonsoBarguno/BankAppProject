@@ -52,6 +52,12 @@ public class CheckingService implements CheckingServiceInterface {
 
     public CheckingAccount substractBalance(Long id, BigDecimal amount) {
 
+        if(amount.compareTo(BigDecimal.valueOf(0))==-1){
+
+            throw new IllegalArgumentException("The amount must be over 0.");
+
+        }
+
         CheckingAccount account = checkingAccountRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No account found."));
 
         account.setBalance(account.getBalance().subtract(amount));
@@ -63,7 +69,8 @@ public class CheckingService implements CheckingServiceInterface {
 
     public void applyPenaltyFee(Long accountId){
 
-        CheckingAccount checkingAccount= checkingAccountRepository.findById(accountId).get();
+        CheckingAccount checkingAccount= checkingAccountRepository.findById(accountId).
+                orElseThrow(()-> new IllegalArgumentException("No account found."));
 
         checkingAccount.applyPenaltyFee();
     }

@@ -2,6 +2,7 @@ package com.FinalProject.BankingApp.controller.accountController;
 
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelAccounts.CheckingAccount;
+import com.FinalProject.BankingApp.model.modelTransaction.Transaction;
 import com.FinalProject.BankingApp.service.serviceAccount.AccountService;
 import com.FinalProject.BankingApp.service.serviceAccount.CheckingService;
 import jakarta.validation.Valid;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,6 +45,13 @@ public class CheckingController implements CheckingControllerInterface {
         checkingService.applyPenaltyFee(id);
 
         return accountService.findById(id);
+    }
+
+    @GetMapping("/sendingTransactionList/{accountId}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Transaction> getSendingTransactionList(@PathVariable Long accountId){
+
+        return accountService.getSendingTransactionList(accountId);
     }
 
 

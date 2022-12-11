@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/transaction")
@@ -57,6 +58,13 @@ public class TransactionController implements TransactionControllerInterface {
         return transaction;
 
 
+    }
+
+    @GetMapping("/getById/{transactionId}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Optional<Transaction> getById(@PathVariable Long transactionId){
+
+        return transactionService.getById(transactionId);
     }
 
 

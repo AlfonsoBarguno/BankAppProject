@@ -37,6 +37,12 @@ public class TransactionService {
 
         Transaction transaction;
 
+        if(amount.compareTo(BigDecimal.valueOf(0))==-1){
+
+            throw new IllegalArgumentException("The amount must be over 0.");
+
+        }
+
         if (accountRepository.existsById(sendingAccount.getId())
                 || accountRepository.existsById(receivingAccount.getId())
                 || sendingAccount.getStatus() == Status.ACTIVE
@@ -53,11 +59,16 @@ public class TransactionService {
 
                 transactionRepository.save(transaction);
 
-                List<Transaction> sendingTransaction = sendingAccount.getSendingTransactionList();
-                sendingTransaction.add(transaction);
+                List<Transaction> newSendingTransactionList = sendingAccount.getSendingTransactionList();
+                newSendingTransactionList.add(transaction);
 
-                List<Transaction> receivingTransaction = receivingAccount.getReceivingTransactionList();
-                receivingTransaction.add(transaction);
+                sendingAccount.setSendingTransactionList(newSendingTransactionList);
+
+
+                List<Transaction> newReceivingTransactionList = receivingAccount.getReceivingTransactionList();
+                newReceivingTransactionList.add(transaction);
+
+                receivingAccount.setReceivingTransactionList(newReceivingTransactionList);
 
 
                 accountRepository.save(sendingAccount);
