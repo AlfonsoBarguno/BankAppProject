@@ -1,5 +1,11 @@
 # BankAppProject
-Requirements
+
+
+This is an Java application, made with SpringBoot and a relational database (SQL). 
+Includes a basic security process and unit and integration tests.
+
+
+These are the requirements of the project:
 
 The system must have 4 types of accounts: StudentChecking, Checking, Savings, and CreditCard.
 
