@@ -54,5 +54,12 @@ public class CheckingController implements CheckingControllerInterface {
         return accountService.getSendingTransactionList(accountId);
     }
 
+    @GetMapping("/receivingTransactionList/{accountId}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Transaction> getReceivingTransactionList(@PathVariable Long accountId){
+
+        return accountService.getReceivingTransactionList(accountId);
+    }
+
 
 }

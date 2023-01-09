@@ -34,6 +34,9 @@ public class CheckingAccount extends Account {
         setMinimumBalance(minimumBalance);
     }
 
+    public CheckingAccount(BigDecimal balance, Status status, LocalDate localDate, String secretKey) {
+    }
+
     public BigDecimal getMonthlyMaintenanceFee() {
         return monthlyMaintenanceFee;
     }

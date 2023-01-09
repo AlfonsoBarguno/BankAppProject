@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -19,13 +20,13 @@ import java.util.Set;
 @Entity
 public abstract class BankUser {
 
-    //extender funcionalidades User
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @NotBlank(message="Enter valid name.")
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -64,5 +65,17 @@ public abstract class BankUser {
 
     public void setName(String name) {
         this.username = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BankUser bankUser)) return false;
+        return getId().equals(bankUser.getId()) && getUsername().equals(bankUser.getUsername()) && getPassword().equals(bankUser.getPassword()) && getRoles().equals(bankUser.getRoles());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUsername(), getPassword(), getRoles());
     }
 }

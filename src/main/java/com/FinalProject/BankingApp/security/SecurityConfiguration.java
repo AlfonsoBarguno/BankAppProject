@@ -32,10 +32,17 @@ public class SecurityConfiguration {
 
        httpSecurity.authorizeHttpRequests()
 
-               .requestMatchers(HttpMethod.PATCH,"/substract/{accountId}").hasRole("ADMIN")
-               .requestMatchers(HttpMethod.PATCH,"/add/{accountId}").hasRole("ADMIN")
-               .requestMatchers(HttpMethod.POST,"/createThirdParty").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.PATCH,"/admin/substract/{accountId}").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.PATCH,"/admin/add/{accountId}").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.POST,"/admin/createThirdParty").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.GET,"/accountholder/create").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.GET,"/accountHolder/findAll").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.DELETE,"/accountHolder/delete/{id}").hasRole("ADMIN")
+               .requestMatchers(HttpMethod.GET,"/accountHolder/findById/{id}").hasRole("ADMIN")
+
+
                .requestMatchers(HttpMethod.GET,"/checkBalance/{accountHolderId}/{accountId}").hasRole("USER")
+               .requestMatchers(HttpMethod.POST,"/transaction/{sendingAccountId}/{receivingAccountId}/{amount}").hasRole("USER")
 
 
 

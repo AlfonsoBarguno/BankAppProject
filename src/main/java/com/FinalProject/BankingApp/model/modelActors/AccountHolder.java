@@ -58,8 +58,11 @@ public class AccountHolder extends BankUser {
         this.secondaryOwnerAccountList = secondaryOwnerAccountList;
     }
 
-    public AccountHolder(Address address) {
+    public AccountHolder(String name, LocalDate of, Address address, Address address1) {
     }
+
+    /*public AccountHolder(Address address) {
+    }*/
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;

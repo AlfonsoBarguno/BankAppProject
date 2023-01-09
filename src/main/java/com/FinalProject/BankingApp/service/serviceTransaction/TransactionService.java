@@ -59,16 +59,20 @@ public class TransactionService {
 
                 transactionRepository.save(transaction);
 
-                List<Transaction> newSendingTransactionList = sendingAccount.getSendingTransactionList();
+                /*List<Transaction> newSendingTransactionList = sendingAccount.getSendingTransactionList();
                 newSendingTransactionList.add(transaction);
 
-                sendingAccount.setSendingTransactionList(newSendingTransactionList);
+                sendingAccount.setSendingTransactionList(newSendingTransactionList);*/
+
+                sendingAccount.getSendingTransactionList().add(transaction);
 
 
-                List<Transaction> newReceivingTransactionList = receivingAccount.getReceivingTransactionList();
+                /*List<Transaction> newReceivingTransactionList = receivingAccount.getReceivingTransactionList();
                 newReceivingTransactionList.add(transaction);
 
-                receivingAccount.setReceivingTransactionList(newReceivingTransactionList);
+                receivingAccount.setReceivingTransactionList(newReceivingTransactionList);*/
+
+                receivingAccount.getReceivingTransactionList().add(transaction);
 
 
                 accountRepository.save(sendingAccount);

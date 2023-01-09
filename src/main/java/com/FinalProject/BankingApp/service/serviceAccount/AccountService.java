@@ -76,4 +76,13 @@ public class AccountService implements AccountServiceInterface {
 
         return sendingTransactionList;
     }
+
+    public List<Transaction> getReceivingTransactionList(Long accountId){
+
+        Account account = accountRepository.findById(accountId).orElseThrow(()->new IllegalArgumentException("No account found."));
+
+        List<Transaction> receivingTransactionList = account.getReceivingTransactionList();
+
+        return receivingTransactionList;
+    }
 }

@@ -3,6 +3,7 @@ package com.FinalProject.BankingApp.service.serviceActors;
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 import com.FinalProject.BankingApp.model.modelSecurity.Role;
+import com.FinalProject.BankingApp.model.modelTransaction.Transaction;
 import com.FinalProject.BankingApp.repository.AccountHolderRepository;
 import com.FinalProject.BankingApp.repository.AccountRepository;
 import com.FinalProject.BankingApp.repository.RoleRepository;
@@ -88,4 +89,8 @@ public class AccountHolderService implements AccountHolderServiceInterface {
     public List<Account> findAccountList(Long accountHolderId) {
         return accountHolderRepository.findById(accountHolderId).get().getAccountList();
     }
+
+
+
+
 }

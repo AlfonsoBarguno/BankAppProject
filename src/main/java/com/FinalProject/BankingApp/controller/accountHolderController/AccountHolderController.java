@@ -3,6 +3,7 @@ package com.FinalProject.BankingApp.controller.accountHolderController;
 import com.FinalProject.BankingApp.model.modelAccounts.Account;
 import com.FinalProject.BankingApp.model.modelActors.AccountHolder;
 import com.FinalProject.BankingApp.model.modelSecurity.Role;
+import com.FinalProject.BankingApp.model.modelTransaction.Transaction;
 import com.FinalProject.BankingApp.repository.BankUserRepository;
 import com.FinalProject.BankingApp.repository.RoleRepository;
 import com.FinalProject.BankingApp.service.serviceActors.AccountHolderService;
@@ -80,6 +81,8 @@ public class AccountHolderController implements AccountHolderControllerInterface
     public List<Account> findAccountList(@PathVariable Long accountHolderId) {
         return accountHolderService.findAccountList(accountHolderId);
     }
+
+
 
     //da como resultado null; posible problema en la búsqueda del accountList
 
