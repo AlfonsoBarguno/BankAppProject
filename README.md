@@ -1,11 +1,14 @@
 # BankAppProject
 
 
-This is an Java application, made with SpringBoot and a relational database (SQL). 
-Includes a basic security process and unit and integration tests.
+This is an <strong>Java application</strong>, made with SpringBoot and a relational database (SQL). 
+Includes a basic security process and currently I'm working in the unit and integration tests.
+
+You can access either as an Admin or as a User, create an Account Holder or a Third Party user, and chose between four types of accounts. 
+The system is able to modify accounts, make transfers, apply interest rates and penalty fees.
 
 
-These are the requirements of the project:
+These were the requirements of the project:
 
 The system must have 4 types of accounts: StudentChecking, Checking, Savings, and CreditCard.
 
