@@ -1,6 +1,5 @@
 # BankAppProject
 ![cover](https://github.com/AlfonsoBarguno/BankAppProject/blob/main/BankAppSystem.png)
-
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
