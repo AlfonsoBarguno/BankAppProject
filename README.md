@@ -38,6 +38,9 @@ To run this project, download it using the git command *git clone* to the folder
     D:\ myProject>git clone https://github.com/AlfonsoBarguno/BankAppProject.git
     ```
 
+First, you have to create an Admin User. The Admin can then create an AccountHolder or a ThridParty who can chose between the differente accounts, depending on his interests. 
+The AccountHolder can check his balance and make transfers to other accounts, and can access a list of the sending and receiving transfers. The Admin can substract and add amounts to any account, as well as delete or create accounts and AccountHolders.
+Finally, every accaount has its proper characteristics (interests rates, penalty fees, minimum balance, etc.)
 
 
 
