@@ -2,9 +2,7 @@
 
 
 
-
-Springboot REST API
-Final bootcamp project demonstrating the use of Java and Spring-boot to build a microservice to be used by an online bank.
+Final bootcamp project demonstrating the use of Java and SpringBoot to build a microservice to be used by an online bank.
 
 Technologies and dependencies
 
