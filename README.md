@@ -31,7 +31,9 @@ To run this project, download it using the git command *git clone* to the folder
     ```
     C:\User\User> D:
     ```
+    ```
     D:\ cd myProject
+    ```
     ```
     D:\ myProject>git clone https://github.com/AlfonsoBarguno/BankAppProject.git
     ```
