@@ -1,5 +1,5 @@
 # BankAppProject
-![cover](https://github.com/AlfonsoBarguno/BankAppProject/blob/main/BankApp System.png)
+![cover](https://github.com/AlfonsoBarguno/BankAppProject/blob/main/BankAppSystem.png)
 
 ## Table of contents
 * [General info](#general-info)
